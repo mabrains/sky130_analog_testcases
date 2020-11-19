@@ -1,0 +1,28 @@
+import numpy as np
+import matplotlib.pyplot as plt
+import ngspyce
+
+
+
+
+with open("./nfet_tb.net", "r") as f:
+    netlist = f.read().split("\n")
+ngspyce.circ(netlist)
+print(netlist)
+length_list = np.arange(0.15, 1.5, 0.15)
+print(length_list)
+vthn_list = []
+for l in length_list:
+    ngspyce.alterparams(len=l)
+
+    ngspyce.cmd("OP")
+    ngspyce.cmd(f'save @m.x1.msky130_fd_pr__nfet_01v8[vth]')
+    vthn, = map(ngspyce.vector, [f'@m.x1.msky130_fd_pr__nfet_01v8[vth]'])
+    print(vthn)
+    vthn_list.append(vthn[0])
+
+print(length_list)
+print(vthn_list)
+plt.rcParams['figure.figsize'] = [16, 10] 
+plt.plot(length_list, vthn_list)
+plt.show()

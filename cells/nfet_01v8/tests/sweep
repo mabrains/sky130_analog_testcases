@@ -1,0 +1,25 @@
+*sweep
+*.include "../sky130_fd_pr__nfet_01v8__tt.pm3.spice"
+.include "../../../models/corners/tt.spice"
+
+* Gate bias
+
+X1 d g s VDD sky130_fd_pr__pfet_01v8  l=0.3 w=1 nf=1 mult=1
+
+VDD VDD 0 1.8
+vs s 0 1.8
+vg g 0 1
+vd d 0 0
+
+.control 
+op
+print v(d) v(g) @m.X1.msky130_fd_pr__pfet_01v8[id] @m.X1.msky130_fd_pr__pfet_01v8[vth] 1/@m.X1.msky130_fd_pr__pfet_01v8[gds]
+
+dc vd 0 1.8 0.01 vg 0 1.8 0.2
+plot V(vd#branch)
+.endc
+.end
+
+*159u nf 1 mul 1 w 2u
+
+

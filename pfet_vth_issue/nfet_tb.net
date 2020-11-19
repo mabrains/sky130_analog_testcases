@@ -1,0 +1,18 @@
+*sweep
+.include "../models/corners/tt.spice"
+
+
+.param len = 0.15
+.param v_bulk = 1
+
+X1 d g 0 b sky130_fd_pr__nfet_01v8  l={len} w=10 nf=1 mult=1
+
+vb b 0 {v_bulk}
+vg g 0 1
+vd d 0 1.8
+.end
+
+
+
+
+
