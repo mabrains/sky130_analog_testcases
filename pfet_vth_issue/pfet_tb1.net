@@ -1,0 +1,21 @@
+*sweep
+.include "../models/corners/ff.spice"
+
+.param len = 0.15
+.param v_bulk = 1
+
+X1 d g VDD b sky130_fd_pr__pfet_01v8  l=8 w=7 nf=1 mult=1
+
+
+VDD VDD 0 DC 1.8
+vb b 0 DC 1.8
+vg g 0 DC 0.8
+vd d 0 DC 0
+
+
+.end
+
+
+
+
+
